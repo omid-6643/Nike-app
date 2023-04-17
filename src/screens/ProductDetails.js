@@ -9,21 +9,21 @@ import {
   Pressable,
 } from "react-native";
 import products from "../data/products";
+import { useSelector } from "react-redux";
 
 const ProductDetails = () => {
-  const product = products[0];
+  const { selectedProduct } = useSelector((store) => store.products);
   const { width } = useWindowDimensions();
 
-
-  const addToCart =() => {
-    console.warn('add to cart')
-  }
+  const addToCart = () => {
+    console.warn("add to cart");
+  };
 
   return (
     <View>
       <ScrollView>
         <FlatList
-          data={product.images}
+          data={selectedProduct.images}
           renderItem={({ item }) => (
             <Image
               source={{ uri: item }}
@@ -35,9 +35,9 @@ const ProductDetails = () => {
           pagingEnabled
         />
         <View style={{ padding: 20 }}>
-          <Text style={styles.title}>{product.name}</Text>
-          <Text style={styles.price}>$ {product.price}</Text>
-          <Text style={styles.description}>{product.description}</Text>
+          <Text style={styles.title}>{selectedProduct.name}</Text>
+          <Text style={styles.price}>$ {selectedProduct.price}</Text>
+          <Text style={styles.description}>{selectedProduct.description}</Text>
         </View>
       </ScrollView>
       <Pressable style={styles.button} onPress={addToCart}>
