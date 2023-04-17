@@ -1,6 +1,7 @@
 import { View, FlatList, StyleSheet, Text, Pressable } from "react-native";
 import cart from "../data/cart";
 import CartListItem from "../components/CartListItem";
+import { useSelector } from "react-redux";
 
 const ShoppingCartTotals = () => (
   <View style={styles.totalsContainer}>
@@ -20,10 +21,12 @@ const ShoppingCartTotals = () => (
 );
 
 const ShoppingCart = () => {
+  const { items } = useSelector((store) => store.cart);
+  
   return (
     <>
       <FlatList
-        data={cart}
+        data={items}
         renderItem={({ item }) => <CartListItem cartItem={item} />}
         ListFooterComponent={ShoppingCartTotals}
       />
